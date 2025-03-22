@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.tienda.service.ProductoService;
+import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,9 +25,13 @@ public class PruebasController {
     public String listado(Model model) {
         var productos = productoService.getProductos(false);
         var categorias = categoriaService.getCategorias(false);
+        var productosPorCategoria = categoriaService.obtenerCantidadProductosPorCategoria();
+
         model.addAttribute("productos", productos);
         model.addAttribute("totalProductos", productos.size());
         model.addAttribute("categorias", categorias);
+        model.addAttribute("productosPorCategoria", productosPorCategoria);
+
         return "/pruebas/listado";
     }
 
@@ -34,9 +39,12 @@ public class PruebasController {
     public String listado(Model model, Categoria categoria) {
         var productos = categoriaService.getCategoria(categoria).getProductos();
         var categorias = categoriaService.getCategorias(false);
+        var productosPorCategoria = categoriaService.obtenerCantidadProductosPorCategoria();
+
         model.addAttribute("productos", productos);
         model.addAttribute("totalProductos", productos.size());
         model.addAttribute("categorias", categorias);
+        model.addAttribute("productosPorCategoria", productosPorCategoria);
         return "/pruebas/listado";
     }
 
@@ -81,4 +89,5 @@ public class PruebasController {
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
     }
+
 }

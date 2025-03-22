@@ -3,6 +3,8 @@ package com.tienda.controller;
 import com.tienda.domain.Categoria;
 import com.tienda.service.CategoriaService;
 import com.tienda.service.impl.FirebaseStorageServiceImpl;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,5 +58,13 @@ public class CategoriaController {
         categoria = categoriaService.getCategoria(categoria);
         model.addAttribute("categoria", categoria);
         return "/categoria/modifica";
+    }
+    
+    @GetMapping("/productos-por-categoria")
+    public List<String> obtenerCantidadProductosPorCategoria() {
+        List<Object[]> resultados = categoriaService.obtenerCantidadProductosPorCategoria();
+        return resultados.stream()
+                .map(obj -> "Categoría: " + obj[0] + " - Productos: " + obj[1])
+                .collect(Collectors.toList());
     }
 }

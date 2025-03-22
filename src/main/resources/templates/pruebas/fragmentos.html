@@ -71,7 +71,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- 3 Sección para crear los filtros -->
         <section th:fragment="filtros" class="bg-light">
             <div class="row py-2">
@@ -155,7 +155,29 @@
                     </form>
                 </div>
             </div>
-            
+
         </section> 
-</body>
+
+        <!-- Mostrar la cantidad de productos por categoría -->
+        <section th:fragment="productosPorCategoria" id="productosPorCategoria">
+            <div class="container mt-4">
+                <h2 class="text-center">Cantidad de Productos por Categoría</h2>
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">Categoría</th>
+                            <th class="text-center">Cantidad de Productos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dato : ${productosPorCategoria}">
+                            <td class="text-center" th:text="${dato[0]}"></td>
+                            <td class="text-center" th:text="${dato[1]}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </body>
 </html>

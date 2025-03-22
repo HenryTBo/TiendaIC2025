@@ -3,9 +3,11 @@ package com.tienda.service;
 
 import com.tienda.domain.Categoria;
 import java.util.List;
+import java.util.List;
 
 public interface CategoriaService {
     
+
     // Se obtiene un listado de categorias en un List
     public List<Categoria> getCategorias(boolean activos);
     
@@ -18,4 +20,7 @@ public interface CategoriaService {
     
     // Se elimina el categoria que tiene el id pasado por parámetro
     public void delete(Categoria categoria);
+
+    List<Object[]> obtenerCantidadProductosPorCategoria();
+
 }
